@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<!--EK CSN-1.D.2: HTTP is a protocol used by the World Wide Web.-->
+<html lang="en">
+    <head>
+        <title>Hello, World!</title>
+        <meta charset="UTF-8">
+    </head>
+    <style>
+        body {
+            background-color: #193242;
+            color: white;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: auto auto;
+            background-color: dodgerblue;
+            padding: 10px;
+        }
+
+        h1 {
+            margin-left: 5%;
+            font-size: 25px;
+        }
+
+        #HamburgerMenuWrapper {
+            align-items: end;
+        }
+
+        #hamburger1, #hamburger2, #hamburger3 {
+            width: 32px;
+            height: 4px;
+            background-color: #ffffff;
+            margin-top: 6px;
+            border-radius: 2px;
+            transition: 0.4s;
+        }
+
+        .box {
+            border-radius: 20px;
+            padding: 5px;
+        }
+
+        hr {
+            width: 95%;
+        }
+
+        #TitleBar {
+            border-radius: 0px;
+            background-color: #00000000;
+        }
+
+        #listBox {
+            background-color: #fb5607;
+            width: 300px;
+            height: 300px;
+            margin: 1%;
+            margin-left: 5%;
+        }
+
+        p {
+            text-align: left;
+        }
+    </style>
+    <script>
+        document.getElementById("classLO").innerHTML = "Hello JavaScript!";
+    </script>
+    <body>
+        <div class="container">
+            <h1>P4: Higher Level Protocols on the Internet, Objects, and Languages</h1>
+            <div id="hamburgerMenuWrapper">
+                <div id="hamburger1"></div>
+                <div id="hamburger2"></div>
+                <div id="hamburger3"></div>
+            </div>
+        </div>
+        <hr>
+        <div class="box" id="listBox">
+            <ul>
+                <li><h3 id="classLO">EK CSN-1.D.3: The World Wide Web uses the Internet.</h3></li>
+                <li><h3 id="classLO">EK CSN-1.B.5: Routing on the Internet is usually dynamic; it is not specified in advance.</h3></li>
+            </ul>
+        </div>
+        <div class="box" id="EKBox">
+            <p id="idCSN2A">EK CSN-1.D.1: The World Wide Web is a system of linked pages, programs, and files.</p>
+        </div>
+    </body>
+</html>
