@@ -115,8 +115,16 @@
         let isDarkMode = true;
         let badMode = false;
 
-        let stuff = document.getElementById("idCSN2A");
-        let stuffInfo = document.getElementById("idCSN2A").innerHTML;
+        let stuff;
+        let stuffInfo;
+
+        let otherStuff;
+
+        window.onload = function () {
+            stuff = document.getElementById("idCSN2A");
+            stuffInfo = stuff.innerHTML;
+
+        };
 
         function changeTheme() {
             if (isDarkMode) {
@@ -141,23 +149,23 @@
 
         function changeBackground() {
             if (!badMode) {
-                stuff.style.color = 
+                stuff.style.backgroundColor = 'blue';
+                badMode = true;
             }
             else if (badMode) {
-                stuff.innerHTML = stuffInfo;
+                stuff.style.backgroundColor = 'transparent';
+                badMode = false;
             }
-            badMode = true;
         }
 
         function badStuff() {
             let prompt1bad = "Are you sure you would like to change to bad stuff?";
             let prompt2bad = "Are you 100 million percent sure??????";
-
             let prompt1good = "Would you like to switch off of bad mode?";
 
             if (!badMode) {
-                if (confirm(prompt1bad) == true) {
-                    if (confirm(prompt2bad) == true) {
+                if (window.confirm(prompt1bad) == true) {
+                    if (window.confirm(prompt2bad) == true) {
                         changeWord();
                         changeBackground();
                     }
@@ -168,8 +176,7 @@
                 }
             }
             else if (badMode) {
-                if (confirm(prompt1good) == true) {
-                    badMode = false;
+                if (window.confirm(prompt1good) == true) {
                     changeWord();
                     changeBackground();
                 }
@@ -181,6 +188,7 @@
             <ul>
                 <li class="home-li"><a class="active-link" href="#">Main Title or Something</a></li>
                 <li class="about"><a href="#">About</a></li>
+                <li class="swap" onclick="swapText();"><a href="#">Swap</a></li>
                 <li class="bad-stuff" onclick="badStuff();"><a>Bad Stuff</a></li>
                 <li class="theme-button" onclick="changeTheme();"><a><i class="fa-solid fa-moon"></a></i></li>
             </ul>
