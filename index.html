@@ -85,6 +85,8 @@
         
         content {
             display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
             margin: 3%;
             gap: 1.5em;
         }
@@ -120,10 +122,20 @@
 
         let otherStuff;
 
+        let count = 0;
+
+        let red = 0;
+        let green = 0;
+        let blue = 0;
+
+        let bgColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
+
+        let colorOrder = ['red', 'green', 'blue']
+
         window.onload = function () {
             stuff = document.getElementById("idCSN2A");
+            otherStuff = document.querySelectorAll(".classLO");
             stuffInfo = stuff.innerHTML;
-
         };
 
         function changeTheme() {
@@ -149,13 +161,26 @@
 
         function changeBackground() {
             if (!badMode) {
-                stuff.style.backgroundColor = 'blue';
+                otherStuff.forEach(element => {
+                    element.style.backgroundColor = 'blue';
+                });
                 badMode = true;
             }
             else if (badMode) {
-                stuff.style.backgroundColor = 'transparent';
+                otherStuff.forEach(element => {
+                    element.style.backgroundColor = 'transparent';
+                });
                 badMode = false;
             }
+        }
+
+        function swapText() {
+            let text1 = document.getElementById('p1');
+            let text2 = document.getElementById('p2');
+
+            let temp = text1.innerHTML;
+            text1.innerHTML = text2.innerHTML;
+            text2.innerHTML = temp;
         }
 
         function badStuff() {
@@ -182,6 +207,47 @@
                 }
             }
         }
+
+        function loopBoxes() {
+            let container = document.getElementById('container');
+
+            let colorIndex = 0;
+
+            for (let i = 0; i < 764; i++) {
+                var newDiv = document.createElement("div");
+                newDiv.id = "loop-box" + String(count + 1);
+                newDiv.className = "box";
+                newDiv.innerHTML = "#" + String(count + 1);
+                
+                if (blue < 255) {
+                    blue++;
+                }
+                else if (green < 255) {
+                    green++;
+                }
+                else if (red < 255) {
+                    red++;
+                }
+                else {
+                    red = 0;
+                    green = 0;
+                    blue = 0;
+                }
+
+                let brightness = (0.2126 * red + 0.7152 * green + 0.0722 * blue)
+
+                if (brightness >= 128) {
+                    newDiv.style.color = 'black'
+                }
+                else {
+                    newDiv.style.color = 'white'
+                }
+
+                newDiv.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`
+                container.appendChild(newDiv);
+                count++;
+            };
+        }
     </script>
     <body>
         <nav>
@@ -189,13 +255,14 @@
                 <li class="home-li"><a class="active-link" href="#">Main Title or Something</a></li>
                 <li class="about"><a href="#">About</a></li>
                 <li class="swap" onclick="swapText();"><a href="#">Swap</a></li>
+                <li class="loop-button" onclick="loopBoxes();"><a>Loop</a></li>
                 <li class="bad-stuff" onclick="badStuff();"><a>Bad Stuff</a></li>
-                <li class="theme-button" onclick="changeTheme();"><a><i class="fa-solid fa-moon"></a></i></li>
+                <li class="theme-button" onclick="changeTheme();"><a><i class="fa-solid fa-moon"></i></a></li>
             </ul>
         </nav>
         <main>
             <h1 id="test">P4: Higher Level Protocols on the Internet, Objects, and Language</h1>
-            <content>
+            <content id="container">
                 <div class="box" id="box1">
                     <ul>
                         <li><h3 class="classLO">EK CSN-1.D.3: The World Wide Web uses the Internet.</h3></li>
@@ -205,6 +272,16 @@
                 <div class="box" id="box2">
                     <ul>
                         <li><p id="idCSN2A">EK CSN-1.D.1: The World Wide Web is a system of linked pages, programs, and files.</p></li>
+                    </ul>
+                </div>
+                <div class="box" id="box3">
+                    <ul>
+                        <li><p id="p1">This swaps with the other</p></li>
+                    </ul>
+                </div>
+                <div class="box" id="box4">
+                    <ul>
+                        <li><p id="p2">And the other swaps with this</p></li>
                     </ul>
                 </div>
             </content>
