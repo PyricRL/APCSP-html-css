@@ -128,9 +128,13 @@
         let green = 0;
         let blue = 0;
 
-        let bgColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
+        let colors = {
+            '1': 'red',
+            '2': 'green',
+            '3': 'blue'
+        }
 
-        let colorOrder = ['red', 'green', 'blue']
+        let bgColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
 
         window.onload = function () {
             stuff = document.getElementById("idCSN2A");
@@ -208,10 +212,24 @@
             }
         }
 
+        function randomizeColor() {
+            for (let i = 1; i < 9; i++) {
+                let r1 = Math.floor(Math.random() * 3) + 1;
+                let r2 = Math.floor(Math.random() * 3) + 1;
+
+                let key1 = String(r1);
+                let key2 = String(r2);
+
+                let temp = colors[String(key1)];
+                colors[String(key1)] = colors[String(key2)];
+                colors[String(key2)] = temp;
+            }
+
+            alert(colors['1'] + colors['2'] + colors['3']);
+        }
+
         function loopBoxes() {
             let container = document.getElementById('container');
-
-            let colorIndex = 0;
 
             for (let i = 0; i < 764; i++) {
                 var newDiv = document.createElement("div");
@@ -219,16 +237,52 @@
                 newDiv.className = "box";
                 newDiv.innerHTML = "#" + String(count + 1);
                 
-                if (blue < 255) {
-                    blue++;
-                }
-                else if (green < 255) {
-                    green++;
-                }
-                else if (red < 255) {
+                if (colors['1'] == 'red') {
                     red++;
+                    if (colors['2'] == 'green') {
+                        green++;
+                        if (colors['3'] == 'blue') {
+                            blue++;
+                        }
+                    }
+                    else if (colors['2'] == 'blue') {
+                        blue++;
+                        if (colors['3'] == 'green') {
+                            green++;
+                        }
+                    }
                 }
-                else {
+                else if (colors['1'] == 'green') {
+                    green++;
+                    if (colors['2'] == 'red') {
+                        red++;
+                        if (colors['3'] == 'blue') {
+                            blue++;
+                        }
+                    }
+                    else if (colors['2'] == 'blue') {
+                        blue++;
+                        if (colors['3'] == 'red') {
+                            red++;
+                        }
+                    }
+                }
+                else if (colors['1'] == 'blue') {
+                    blue++;
+                    if (colors['2'] == 'green') {
+                        green++;
+                        if (colors['3'] == 'red') {
+                            red++;
+                        }
+                    }
+                    else if (colors['2'] == 'red') {
+                        red++;
+                        if (colors['3'] == 'green') {
+                            green++;
+                        }
+                    }
+                }
+                if (red == 255 && green == 255 && blue == 255) {
                     red = 0;
                     green = 0;
                     blue = 0;
@@ -247,6 +301,9 @@
                 container.appendChild(newDiv);
                 count++;
             };
+            alert(red)
+
+            randomizeColor();
         }
     </script>
     <body>
