@@ -128,11 +128,7 @@
         let green = 0;
         let blue = 0;
 
-        let colors = {
-            '1': 'red',
-            '2': 'green',
-            '3': 'blue'
-        }
+        let color = ['red', 'green', 'blue'];
 
         let bgColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
 
@@ -224,8 +220,36 @@
                 colors[String(key1)] = colors[String(key2)];
                 colors[String(key2)] = temp;
             }
+        }
 
-            alert(colors['1'] + colors['2'] + colors['3']);
+        function incrementColors() {
+            // Loop through the color array and increment the respective RGB channels
+            if (color[0] === 'red' && red < 255) {
+                red++;
+            } else if (color[0] === 'green' && green < 255) {
+                green++;
+            } else if (color[0] === 'blue' && blue < 255) {
+                blue++;
+            }
+
+            // Move to the next color in the order once one reaches 255
+            if (red === 255 || green === 255 || blue === 255) {
+                if (color[0] === 'red' && red === 255) {
+                    color.push(color.shift()); // Move red to the end (or start of the next color)
+                } else if (color[0] === 'green' && green === 255) {
+                    color.push(color.shift()); // Move green to the end
+                } else if (color[0] === 'blue' && blue === 255) {
+                    color.push(color.shift()); // Move blue to the end
+                }
+            }
+
+            // Reset colors when all are at 255
+            if (red === 255 && green === 255 && blue === 255) {
+                red = 0;
+                green = 0;
+                blue = 0;
+                randomizeColor();  // Optionally randomize the color order after reset
+            }
         }
 
         function loopBoxes() {
@@ -236,57 +260,7 @@
                 newDiv.id = "loop-box" + String(count + 1);
                 newDiv.className = "box";
                 newDiv.innerHTML = "#" + String(count + 1);
-                
-                if (colors['1'] == 'red') {
-                    red++;
-                    if (colors['2'] == 'green') {
-                        green++;
-                        if (colors['3'] == 'blue') {
-                            blue++;
-                        }
-                    }
-                    else if (colors['2'] == 'blue') {
-                        blue++;
-                        if (colors['3'] == 'green') {
-                            green++;
-                        }
-                    }
-                }
-                else if (colors['1'] == 'green') {
-                    green++;
-                    if (colors['2'] == 'red') {
-                        red++;
-                        if (colors['3'] == 'blue') {
-                            blue++;
-                        }
-                    }
-                    else if (colors['2'] == 'blue') {
-                        blue++;
-                        if (colors['3'] == 'red') {
-                            red++;
-                        }
-                    }
-                }
-                else if (colors['1'] == 'blue') {
-                    blue++;
-                    if (colors['2'] == 'green') {
-                        green++;
-                        if (colors['3'] == 'red') {
-                            red++;
-                        }
-                    }
-                    else if (colors['2'] == 'red') {
-                        red++;
-                        if (colors['3'] == 'green') {
-                            green++;
-                        }
-                    }
-                }
-                if (red == 255 && green == 255 && blue == 255) {
-                    red = 0;
-                    green = 0;
-                    blue = 0;
-                }
+                incrementColors() 
 
                 let brightness = (0.2126 * red + 0.7152 * green + 0.0722 * blue)
 
@@ -301,9 +275,7 @@
                 container.appendChild(newDiv);
                 count++;
             };
-            alert(red)
-
-            randomizeColor();
+            alert(color[0] + color[1] + color[2]);
         }
     </script>
     <body>
